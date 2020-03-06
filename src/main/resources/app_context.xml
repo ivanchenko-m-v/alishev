@@ -18,7 +18,7 @@
     <bean id="jazzBean"
           class="ru.imv.tutorial.spring.JazzMusic">
     </bean>
-    <bean id="musicPlayer" class="ru.imv.tutorial.spring.MusicPlayer">
+    <bean id="musicPlayer" class="ru.imv.tutorial.spring.MusicPlayer" scope="prototype">
         <property name="musicList">
             <list>
                 <ref bean="rockBean"/>

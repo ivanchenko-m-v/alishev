@@ -1,7 +1,10 @@
 package ru.imv.tutorial.spring;
 
+import java.util.List;
+
 public class MusicPlayer {
     private Music music;
+    private List<Music> musicList;
     private String name;
     private int volume;
 
@@ -12,7 +15,19 @@ public class MusicPlayer {
         this.music = music;
     }
 
-    public void playMusic() {
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
+    }
+
+    public void playList() {
+        if (musicList == null || musicList.isEmpty()) {
+            return;
+        }
+        System.out.println("Playing list:");
+        musicList.stream().forEach(m -> playMusic(m));
+    }
+
+    private void playMusic(final Music music) {
         System.out.println("Playing: " + music.getSong());
     }
 
@@ -34,5 +49,13 @@ public class MusicPlayer {
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    public List<Music> getMusicList() {
+        return musicList;
+    }
+
+    public void setMusicList(List<Music> musicList) {
+        this.musicList = musicList;
     }
 }

@@ -18,7 +18,7 @@ public class Computer {
     public String toString() {
         return "Computer{" +
                 "id=" + id +
-                ", player=" + player.getMusic().getSong() +
+                ", player=" + player +
                 '}';
     }
 }//public class Computer

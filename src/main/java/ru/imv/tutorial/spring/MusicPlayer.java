@@ -1,28 +1,36 @@
 package ru.imv.tutorial.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
     @Autowired
-    private Music music;
+    @Qualifier("classicalMusic")
+    private Music classicalMusic;
+    @Autowired
+    @Qualifier("rockMusic")
+    private Music rockMusic;
+    @Autowired
+    @Qualifier("jazzMusic")
+    private Music jazzMusic;
 
-//    public MusicPlayer(Music music) {
-//        this.music = music;
-//    }
-
-    public void playMusic() {
-        System.out.println("Playing: " + music.getSong());
+    public void playMusic(MusicGenre genre) {
+        Music music;
+        switch (genre){
+            case CLASSICAL:
+                music=classicalMusic;
+                break;
+            case ROCK:
+                music=rockMusic;
+                break;
+            case JAZZ:
+                music=jazzMusic;
+                break;
+            default:
+                throw new RuntimeException("Undefined music genre");
+        }
+        System.out.println("Playing: " + music.getRandomSong());
     }
-
-    //
-//    @Autowired
-//    public void setMusic(Music music) {
-//        this.music = music;
-//    }
-    public Music getMusic() {
-        return music;
-    }
-
 }

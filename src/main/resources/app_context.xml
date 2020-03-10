@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="ru.imv.tutorial.spring"/>
+    <context:property-placeholder location="musicPlayer.properties" />
 <!--    <bean id="musicBean"-->
 <!--          class="ru.imv.tutorial.spring.RockMusic">-->
 <!--    </bean>-->

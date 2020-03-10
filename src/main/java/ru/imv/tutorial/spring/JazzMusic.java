@@ -1,11 +1,13 @@
 package ru.imv.tutorial.spring;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope("singleton")
 public class JazzMusic implements Music {
     private static List<String> playList = new ArrayList<>();
 

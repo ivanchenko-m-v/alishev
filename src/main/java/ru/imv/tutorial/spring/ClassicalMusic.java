@@ -1,7 +1,10 @@
 package ru.imv.tutorial.spring;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +33,15 @@ public class ClassicalMusic implements Music {
     @Override
     public String getRandomSong() {
         return playList.get((int) (Math.random() * (double) playList.size()));
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        System.out.println("ClassicalMusic postConstruct");
+    }
+
+    @PreDestroy
+    private void preDestroy() {
+        System.out.println("ClassicalMusic preDestroy");
     }
 }

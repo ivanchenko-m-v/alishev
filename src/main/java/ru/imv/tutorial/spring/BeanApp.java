@@ -12,7 +12,15 @@ public class BeanApp {
         MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
 
         //10 случайных песен разных жанров
-        IntStream.range(0, 10).forEach(i -> player.playMusic(getRandomMusicGenre()));
+        //IntStream.range(0, 10).forEach(i -> player.playMusic(getRandomMusicGenre()));
+        //Значение properties
+        System.out.println("PlayerName: " + player.getName());
+        System.out.println("volume: " + player.getVolume());
+        //Scope
+        ClassicalMusic classicalMusic1 = context.getBean("classicalMusic", ClassicalMusic.class);
+        ClassicalMusic classicalMusic2 = context.getBean("classicalMusic", ClassicalMusic.class);
+        System.out.println(classicalMusic1 == classicalMusic2);
+
 
         context.close();
     }

@@ -5,39 +5,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+import java.util.List;
+
 public class MusicPlayer {
-    @Autowired
-    @Qualifier("classicalMusic")
-    private Music classicalMusic;
-    @Autowired
-    @Qualifier("rockMusic")
-    private Music rockMusic;
-    @Autowired
-    @Qualifier("jazzMusic")
-    private Music jazzMusic;
+    private List<Music> musicGenres;
 
     @Value("${musicPlayer.name}")
     String name;
     @Value("${musicPlayer.volume}")
     int volume;
 
-    public void playMusic(MusicGenre genre) {
-        Music music;
-        switch (genre){
-            case CLASSICAL:
-                music=classicalMusic;
-                break;
-            case ROCK:
-                music=rockMusic;
-                break;
-            case JAZZ:
-                music=jazzMusic;
-                break;
-            default:
-                throw new RuntimeException("Undefined music genre");
+    public MusicPlayer(List<Music> musicGenres) {
+        this.musicGenres = musicGenres;
+    }
+
+    public void playMusic() {
+        if (this.musicGenres == null || this.musicGenres.isEmpty()) {
+            return;
         }
-        System.out.println("Playing: " + music.getRandomSong());
+        System.out.println("Playing: " + getRandomMusicGenre().getRandomSong());
+    }
+
+    private Music getRandomMusicGenre() {
+        return musicGenres.get((int) (Math.random() * musicGenres.size()));
     }
 
     public String getName() {

@@ -1,5 +1,6 @@
 package ru.imv.tutorial.spring;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.stream.IntStream;
@@ -7,20 +8,17 @@ import java.util.stream.IntStream;
 public class BeanApp {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app_context.xml");
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app_context.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 
         MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
 
-        //10 случайных песен разных жанров
-        //IntStream.range(0, 10).forEach(i -> player.playMusic(getRandomMusicGenre()));
         //Значение properties
         System.out.println("PlayerName: " + player.getName());
         System.out.println("volume: " + player.getVolume());
-        //Scope
-        ClassicalMusic classicalMusic1 = context.getBean("classicalMusic", ClassicalMusic.class);
-        ClassicalMusic classicalMusic2 = context.getBean("classicalMusic", ClassicalMusic.class);
-        System.out.println(classicalMusic1 == classicalMusic2);
 
+        //Проигрывание 10 случайных песен разных жанров музыки
+        IntStream.range(0, 10).forEach(val -> player.playMusic());
 
         context.close();
     }

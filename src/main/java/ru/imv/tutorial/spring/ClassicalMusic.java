@@ -8,7 +8,6 @@ import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class ClassicalMusic implements Music {
     private static List<String> playList = new ArrayList<>();
 
